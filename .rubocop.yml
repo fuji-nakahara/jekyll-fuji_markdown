@@ -1,0 +1,13 @@
+# To use the MeowCop gem.
+inherit_gem:
+  meowcop:
+    - config/rubocop.yml
+
+AllCops:
+  TargetRubyVersion: 2.5
+
+# You can customize rubocop settings.
+# For example.
+# Style/FrozenStringLiteralComment:
+#   Enabled: true
+#   EnforcedStyle: always
