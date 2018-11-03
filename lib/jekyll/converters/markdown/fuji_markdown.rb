@@ -4,11 +4,13 @@ module Jekyll
   module Converters
     class Markdown
       class FujiMarkdown
-        def initialize(_config)
+        def initialize(config)
+          @config = config['FujiMarkdown'] || {}
         end
 
         def convert(content, parser: ::FujiMarkdown)
-          parser.render(content)
+          option = @config['output']&.upcase&.to_sym || :HTML
+          parser.render(content, option)
         end
       end
     end

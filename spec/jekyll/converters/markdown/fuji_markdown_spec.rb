@@ -1,17 +1,36 @@
 RSpec.describe Jekyll::Converters::Markdown::FujiMarkdown do
-  subject { described_class.new(config) }
+  let(:converter) { described_class.new(config) }
 
   let(:config) { {} }
 
   describe '#convert' do
+    subject { converter.convert(content, parser: parser) }
+
+    let(:parser) { spy('parser') }
     let(:content) { 'content' }
 
-    it 'calls parser.render' do
-      parser = spy('parser')
+    context 'without options' do
+      it 'calls parser.render with :HTML option' do
+        subject
 
-      subject.convert(content, parser: parser)
+        expect(parser).to have_received(:render).with(content, :HTML)
+      end
+    end
 
-      expect(parser).to have_received(:render).with(content)
+    context 'with option `output: kakuyomu`' do
+      let(:config) do
+        {
+          'FujiMarkdown' => {
+            'output' => 'kakuyomu'
+          }
+        }
+      end
+
+      it 'calls parser.render with :KAKUYOMU option' do
+        subject
+
+        expect(parser).to have_received(:render).with(content, :KAKUYOMU)
+      end
     end
   end
 end
