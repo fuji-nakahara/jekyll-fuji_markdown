@@ -13,7 +13,7 @@ RSpec.describe Jekyll::Converters::Markdown::FujiMarkdown do
       it 'calls parser.render with :HTML option' do
         subject
 
-        expect(parser).to have_received(:render).with(content, :HTML)
+        expect(parser).to have_received(:render).with(content)
       end
     end
 
